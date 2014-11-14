@@ -1,0 +1,18 @@
+﻿@model RefilWeb.Models.Meeting
+@{
+    ViewBag.Title = "BookProcess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Process Books</h2>
+
+<p class="text-warning">Are you sure you want to process the book votes for the meeting on @Html.DisplayFor(m => m.Date)?</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-success">yes, process the votes</button>
+}
+    
+
+

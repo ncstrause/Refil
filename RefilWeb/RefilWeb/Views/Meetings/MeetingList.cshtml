@@ -1,0 +1,90 @@
+﻿@model IEnumerable<RefilWeb.Models.Meeting>
+
+@{
+    ViewBag.Title = "MeetingList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MeetingList</h2>
+
+@if (User.IsAdmin)
+{
+    <p>
+        <a href="/meetings/create">create a new meeting</a>
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrinkProvider)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FoodProvider)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Title)
+        </td>
+        <td>
+            @if (item.DrinkProvider != null)
+            {
+                <p>
+                    <span>@item.DrinkProvider.FirstName</span>
+                    <span>@item.DrinkProvider.LastName</span>
+                </p>
+
+                if (item.DrinkProvider.UserId == User.UserId)
+                {
+                    <a href="/meetings/@item.Id/drink/unregister">unregister</a>
+                }
+            }
+            else
+            {
+                <a href="/meetings/@item.Id/drink/register">sign up for drink</a>
+            }
+            
+        </td>
+        <td>
+            @if (item.FoodProvider != null)
+            {
+                <p>
+                    <span>@item.FoodProvider.FirstName</span>
+                    <span>@item.FoodProvider.LastName</span>
+                </p>
+
+                if (item.FoodProvider.UserId == User.UserId)
+                {
+                    <a href="/meetings/@item.Id/food/unregister">unregister</a>
+                }
+            }
+            else
+            {
+                <a href="/meetings/@item.Id/food/register">sign up for food</a>
+            }
+        </td>
+        <td>
+            <a href="/meetings/@item.Id/books/list">books</a>
+            @if (User.IsAdmin)
+            {
+                <a href="/meetings/@item.Id/edit">edit</a>
+            }
+        </td>
+        
+            
+    </tr>
+}
+
+</table>

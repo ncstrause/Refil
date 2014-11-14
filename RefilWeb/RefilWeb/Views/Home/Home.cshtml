@@ -1,0 +1,47 @@
+﻿@model RefilWeb.Models.ViewModels.HomeViewModel
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Welcome To ReFIL</h2>
+        </div>
+        
+        <div class="jumbotron">
+            <h2>Next Meeting</h2>
+            @if (Model.NextMeeting != null) { 
+                <table class="table">
+                    <tr>
+                        <th>Date</th>
+                        <th>Book</th>
+                        <th>Food</th>
+                        <th>Drinks</th>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.NextMeeting.Date)</td>
+                        <td>@(Model.NextMeeting.Book != null ? Model.NextMeeting.Book.Title : "No book decided yet.")</td>
+                        <td>@(Model.NextMeeting.DrinkProvider != null ? Model.NextMeeting.DrinkProvider.FullName : "No drink provider yet.")</td>
+                        <td>@(Model.NextMeeting.FoodProvider != null ? Model.NextMeeting.FoodProvider.FullName : "No food provider yet.")</td>
+                    </tr>
+                </table>
+            }
+            else
+            {
+                <p>No meetings have been created yet.</p>
+            }
+        </div>
+
+        <h2>Announcements</h2>
+        @foreach (var item in Model.Announcements)
+        {
+            <div class="alert alert-warning">
+                <h3>@item.Title</h3>
+                <p>@item.Message</p>
+                <p><span>@item.Creator.FullName</span> on <span>@Html.DisplayFor(modelItem => item.CreateDate)</span></p>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "AdminHome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header">
+            <h2>Admin Home</h2>
+        </div>
+        
+        @if (ViewBag.ErrorMessages != null) {
+            foreach (var error in ViewBag.ErrorMessages)
+            {
+                <div class="alert alert-danger">
+                    @error
+                </div>
+            }
+        }
+
+        @if (ViewBag.SuccessMessages != null)
+        {
+            foreach (var message in ViewBag.SuccessMessages)
+             {
+                 <div class="alert alert-success">
+                     @message
+                 </div>
+             }
+        }
+
+        <a href="/admin/email">Send an email to all users</a>
+        <br />
+        <a href="/admin/promote">Promote another user to admin status</a>
+        <br />
+        <a href="/announcements/create">Create an announcement for the home page</a>
+
+    </div>
+</div>
+
+

@@ -69,7 +69,7 @@ namespace RefilWeb.Controllers
             return Redirect("/admin/home");
         }
 
-        private static string GetAllUserEmailAddresses()
+        private string GetAllUserEmailAddresses()
         {
             var emails = UserService.GetAll().Select(u => u.Email);
             return String.Join(",", emails);

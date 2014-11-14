@@ -18,11 +18,22 @@ namespace RefilWeb.Service
             repository = new UserRepository(context);
         }
 
-        public void Create(User user)
+        public IServiceValidationResponse Create(User user)
         {
-            user.Roles = new List<Role> {RoleDefinitions.User};
-            user.Password = Md5Hash(user.Password);
-            repository.Create(user);
+            var response = new ServiceValidationResponse();
+
+            if (repository.GetAll().All(u => u.Email != user.Email))
+            {
+                user.Roles = new List<Role> { RoleDefinitions.User };
+                user.Password = Md5Hash(user.Password);
+                repository.Create(user);
+            }
+            else
+            {
+                response.AddError("", "That email is already registered.");
+            }
+
+            return response;
         }
 
         public User Get(int id)

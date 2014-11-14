@@ -15,22 +15,28 @@ namespace RefilWeb.Controllers
         [Route("create-account"), HttpPost]
         public ActionResult PostCreateAccount(CreateAccountViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View("CreateAccount", model);
+            
+            var response = UserService.Create(new User
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
+                    Password = model.Password
+                });
+
+            if (response.IsValid)
             {
-                UserService.Create(new User
-                    {
-                        FirstName = model.FirstName,
-                        LastName = model.LastName,
-                        Email = model.Email,
-                        Password = model.Password
-                    }); 
-            }
-            else
-            {
-                return View("CreateAccount", model);
+                return Redirect("/home");
             }
 
-            return Redirect("/home");
+            foreach (var error in response.GetErrors())
+            {
+                ModelState.AddModelError(error.Key, error.Value);
+            }
+
+            return View("CreateAccount", model);
+            
         }
     }
 }

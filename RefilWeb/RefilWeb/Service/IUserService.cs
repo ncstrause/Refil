@@ -6,7 +6,7 @@ namespace RefilWeb.Service
 {
     public interface IUserService
     {
-        void Create(User user);
+        IServiceValidationResponse Create(User user);
         User Get(int id);
         void Update(User user);
         IServiceValidationResponse<User> AuthenticateUser(string email, string password);

@@ -229,7 +229,7 @@
     <Content Include="Views\Authentication\AccessDenied.cshtml" />
     <Content Include="Views\Book\BookProcess.cshtml" />
     <Content Include="Views\Admin\AdminEmail.cshtml" />
-    <Content Include="Views\Book\BookChooseMeeting.cshtml" />
+    <Content Include="Views\Home\BookChooseMeeting.cshtml" />
     <Content Include="Views\Admin\AdminPromote.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

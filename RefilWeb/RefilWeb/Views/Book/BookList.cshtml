@@ -56,4 +56,8 @@
 
 </table>
 
-<a href="/meetings/@Model.Meeting.Id/books/process" class="btn btn-lg btn-warning">Process Books</a>
+@if (User.IsAdmin)
+{
+    <a href="/meetings/@Model.Meeting.Id/books/process" class="btn btn-lg btn-warning">Process Books</a>
+}
+

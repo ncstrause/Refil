@@ -1,0 +1,15 @@
+﻿@model IEnumerable<RefilWeb.Models.Meeting>
+@{
+    ViewBag.Title = "BookChooseMeeting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Choose Meeting</h2>
+
+<p>Books are organized by meeting. Choose which meeting you would like to view books for.</p>
+
+@foreach (var item in Model)
+{
+    <a href="/meetings/@item.Id/books/list">Meeting taking place on @Html.DisplayFor(modelItem => item.Date)</a><br />
+}
+

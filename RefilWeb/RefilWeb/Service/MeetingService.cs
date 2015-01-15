@@ -36,11 +36,11 @@ namespace RefilWeb.Service
         public IServiceValidationResponse<Meeting> GetNextMeeting()
         {
             var response = new ServiceValidationResponse<Meeting>();
-            var meetings = repository.GetAll();
+            var meetings = repository.GetAll().ToList();
 
-            if (meetings.Any())
+            if (meetings.Any(m => m.Date > DateTime.Now))
             {
-                response.ServiceResultEntity = repository.GetAll().Where(m => m.Date > DateTime.Now).OrderBy(m => m.Date).First();
+                response.ServiceResultEntity = meetings.Where(m => m.Date > DateTime.Now).OrderBy(m => m.Date).First();
             }
             else
             {

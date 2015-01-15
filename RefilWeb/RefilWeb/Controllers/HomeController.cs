@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using RefilWeb.Authentication;
 using RefilWeb.Models.ViewModels;
 
@@ -22,6 +23,13 @@ namespace RefilWeb.Controllers
                 model.NextMeeting = response.ServiceResultEntity;
             }
             return View("Home", model);
+        }
+
+        [Route("books/chooseMeeting")]
+        public ActionResult GetChooseMeeting()
+        {
+            var meetings = MeetingService.GetAll().OrderBy(m => m.Date).Take(50);
+            return View("BookChooseMeeting", meetings);
         }
     }
 }

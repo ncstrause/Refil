@@ -9,6 +9,7 @@ namespace RefilWeb.Service
         void Create(Meeting meeting);
         IEnumerable<Meeting> GetAll();
         Meeting Get(int meetingId);
+        void Delete(Meeting meeting);
         IServiceValidationResponse<Meeting> GetNextMeeting();
         void Update(Meeting meeting);
         void SetDrinkProvider(int meetingId, int userId);

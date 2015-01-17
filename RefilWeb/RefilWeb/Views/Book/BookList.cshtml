@@ -47,9 +47,14 @@
             @Html.DisplayFor(modelItem => item.Votes)
         </td>
         <td>
-            <a href="/meetings/@Model.Meeting.Id/books/@item.Id/upvote">vote up</a>
+            <a class="btn btn-sm btn-success btn-default" href="/meetings/@Model.Meeting.Id/books/@item.Id/upvote">
+                <span class="glyphicon glyphicon-chevron-up"></span>
+            </a>
             <br />
-            <a href="/meetings/@Model.Meeting.Id/books/@item.Id/downvote">vote down</a>
+            <br />
+            <a class="btn btn-sm btn-danger btn-default" href="/meetings/@Model.Meeting.Id/books/@item.Id/downvote">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
         </td>
     </tr>
 }

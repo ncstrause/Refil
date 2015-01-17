@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Suggest Book</h2>
+<h2>Suggest A Book</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -56,5 +56,5 @@
 }
 
 <div>
-    <a href="/books/list">back to list</a>
+    @Html.ActionLink("back to list", "GetList", "Book")
 </div>

@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq;
+using System.Web.Mvc;
 using RefilWeb.Authentication;
 using RefilWeb.Models;
 
@@ -34,7 +36,7 @@ namespace RefilWeb.Controllers
 
         [RefilAuthorize(Roles = "Admin")]
         [Route("{meetingId}/edit"), HttpPost]
-        public ActionResult GetEdit(Meeting meeting)
+        public ActionResult PostEdit(Meeting meeting)
         {
             MeetingService.Update(meeting);
 
@@ -46,6 +48,45 @@ namespace RefilWeb.Controllers
         public ActionResult GetList()
         {
             return View("MeetingList", MeetingService.GetAll());
+        }
+
+        [RefilAuthorize(Roles = "Admin")]
+        [Route("delete"), HttpGet]
+        public ActionResult GetDelete(int id)
+        {
+            try
+            {
+                var meeting = MeetingService.Get(id);
+                return View("MeetingDelete", meeting);
+            }
+            catch (Exception)
+            {
+                return Redirect("/meetings/list");
+            }
+        }
+
+        [RefilAuthorize(Roles = "Admin")]
+        [Route("delete"), HttpPost]
+        public ActionResult PostDelete(int id)
+        {
+            try
+            {
+                var meeting = MeetingService.Get(id);
+
+                var books = BookService.GetAll().Where(b => b.Id == id);
+
+                foreach (var book in books)
+                {
+                    BookService.Delete(book);
+                }
+
+                MeetingService.Delete(meeting);
+                return Redirect("/meetings/list");
+            }
+            catch (Exception e)
+            {
+                return Redirect("/meetings/list");
+            }
         }
 
         [RefilAuthorize]

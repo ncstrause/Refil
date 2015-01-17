@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RefilWeb.Models;
 using System.Data.Entity;
@@ -33,6 +34,7 @@ namespace RefilWeb.Repository
 
         public void Update(Announcement announcement)
         {
+            announcement.CreateDate = DateTime.Now;
             var attachedAnnouncement = context.Announcements.Attach(announcement);
             context.Entry(attachedAnnouncement).State = EntityState.Modified;
             context.SaveChanges();

@@ -29,7 +29,7 @@ namespace RefilWeb.Controllers
         {
             BookService.Create(new Book
             {
-                Creator = UserService.Get(User.UserId),
+                Creator = UserService.Get(User.UserId).ServiceResultEntity,
                 Meeting = MeetingService.Get(meetingId),
                 Title = model.Title,
                 Author = model.Author,
@@ -44,7 +44,7 @@ namespace RefilWeb.Controllers
         [Route("{bookId}/upvote")]
         public ActionResult VoteUp(int bookId, string meetingId)
         {
-            BookService.Upvote(bookId, UserService.Get(User.UserId));
+            BookService.Upvote(bookId, UserService.Get(User.UserId).ServiceResultEntity);
             return Redirect("/meetings/" + meetingId + "/books/list");
         }
 
@@ -52,7 +52,7 @@ namespace RefilWeb.Controllers
         [Route("{bookId}/downvote")]
         public ActionResult VoteDown(int bookId, string meetingId)
         {
-            BookService.Downvote(bookId, UserService.Get(User.UserId));
+            BookService.Downvote(bookId, UserService.Get(User.UserId).ServiceResultEntity);
             return Redirect("/meetings/" + meetingId + "/books/list");
         }
 

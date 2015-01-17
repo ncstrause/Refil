@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>MeetingList</h2>
+<h2>Meetings</h2>
 
 @if (User.IsAdmin)
 {
     <p>
-        <a href="/meetings/create">create a new meeting</a>
+        @Html.ActionLink("Create a new meeting", "GetCreate", "Meetings")
     </p>
 }
 
@@ -79,7 +79,11 @@
             <a href="/meetings/@item.Id/books/list">books</a>
             @if (User.IsAdmin)
             {
+                <br />
+                //@Html.ActionLink("edit", "GetEdit", "Meetings", new { id = @item.Id }, new { })
                 <a href="/meetings/@item.Id/edit">edit</a>
+                <br />
+                @Html.ActionLink("delete", "GetDelete", "Meetings", new { id = @item.Id }, new {})
             }
         </td>
         

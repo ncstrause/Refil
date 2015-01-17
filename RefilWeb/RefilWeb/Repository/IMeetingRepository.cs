@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RefilWeb.Models;
 
 namespace RefilWeb.Repository
@@ -13,5 +9,6 @@ namespace RefilWeb.Repository
         IEnumerable<Meeting> GetAll();
         Meeting Get(int id);
         void Update(Meeting meeting);
+        void Delete(Meeting meeting);
     }
 }

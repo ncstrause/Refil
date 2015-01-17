@@ -36,5 +36,11 @@ namespace RefilWeb.Repository
             context.Entry(attachedMeeting).State = EntityState.Modified;
             context.SaveChanges();
         }
+
+        public void Delete(Meeting meeting)
+        {
+            context.Meetings.Remove(meeting);
+            context.SaveChanges();
+        }
     }
 }

@@ -14,8 +14,8 @@ namespace RefilWeb.Service
 
         public MeetingService(RefilContext context)
         {
-            this.repository = new MeetingRepository(context);
-            this.userService = new UserService(context);
+            repository = new MeetingRepository(context);
+            userService = new UserService(context);
         }
 
         public void Create(Meeting meeting)
@@ -31,6 +31,11 @@ namespace RefilWeb.Service
         public Meeting Get(int meetingId)
         {
             return repository.Get(meetingId);
+        }
+
+        public void Delete(Meeting meeting)
+        {
+            repository.Delete(meeting);
         }
 
         public IServiceValidationResponse<Meeting> GetNextMeeting()
@@ -59,7 +64,7 @@ namespace RefilWeb.Service
         public void SetDrinkProvider(int meetingId, int userId)
         {
             var meeting = Get(meetingId);
-            var user = userService.Get(userId);
+            var user = userService.Get(userId).ServiceResultEntity;
             meeting.DrinkProvider = user;
             Update(meeting);
         }
@@ -78,7 +83,7 @@ namespace RefilWeb.Service
         public void SetFoodProvider(int meetingId, int userId)
         {
             var meeting = Get(meetingId);
-            var user = userService.Get(userId);
+            var user = userService.Get(userId).ServiceResultEntity;
             meeting.FoodProvider = user;
             Update(meeting);
         }

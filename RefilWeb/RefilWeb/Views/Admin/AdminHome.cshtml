@@ -29,11 +29,13 @@
              }
         }
 
-        <a href="/admin/email">Send an email to all users</a>
+        @Html.ActionLink("Send email to all users", "GetSendEmail", "Admin")
         <br />
-        <a href="/admin/promote">Promote another user to admin status</a>
+        @Html.ActionLink("Promote another user to admin status", "GetAdminPromote", "Admin")
         <br />
-        <a href="/announcements/create">Create an announcement for the home page</a>
+        @Html.ActionLink("Create an announcement for the home page", "GetCreate", "Announcement")
+        <br />
+        @Html.ActionLink("View all users' information", "GetViewUsers", "Admin")
 
     </div>
 </div>

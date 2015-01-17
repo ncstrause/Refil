@@ -9,5 +9,6 @@ namespace RefilWeb.Repository
         User Get(int id);
         IEnumerable<User> GetAll();
         void Update(User user);
+        void Delete(User user);
     }
 }

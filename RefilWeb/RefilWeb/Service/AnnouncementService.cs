@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RefilWeb.Models;
 using RefilWeb.Repository;
+using RefilWeb.Validation;
 
 namespace RefilWeb.Service
 {
@@ -29,7 +30,7 @@ namespace RefilWeb.Service
 
         public void Create(Announcement announcement, int userId)
         {
-            var user = userService.Get(userId);
+            var user = userService.Get(userId).ServiceResultEntity;
             announcement.Creator = user;
             announcement.CreateDate = DateTime.Now;
             repository.Create(announcement);
@@ -43,6 +44,24 @@ namespace RefilWeb.Service
         public void Update(Announcement announcement)
         {
             repository.Update(announcement);
+        }
+
+        public IServiceValidationResponse<bool> Delete(Announcement announcement)
+        {
+            var response = new ServiceValidationResponse<bool>();
+
+            try
+            {
+                repository.Delete(announcement);
+                response.ServiceResultEntity = true;
+            }
+            catch (Exception)
+            {
+                response.AddError("Id", "Unable to delete announcement");
+                response.ServiceResultEntity = false;
+            }
+
+            return response;
         }
     }
 }

@@ -36,7 +36,7 @@ namespace RefilWeb.Controllers
             if (!ModelState.IsValid) return View("AdminEmail", viewModel);
 
             var response = emailService.SendEmail(GetAllUserEmailAddresses(), 
-                UserService.Get(User.UserId).Email, viewModel.Subject, viewModel.Body);
+                UserService.Get(User.UserId).ServiceResultEntity.Email, viewModel.Subject, viewModel.Body);
 
             if (response.IsValid)
             {
@@ -67,6 +67,19 @@ namespace RefilWeb.Controllers
             }
 
             return Redirect("/admin/home");
+        }
+
+        [Route("userList"), HttpGet]
+        public ActionResult GetViewUsers()
+        {
+            return View("AdminViewUsers", 
+                UserService.GetAll().Select(u => new ViewUsersViewModel
+                {
+                    Email = u.Email,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Id = u.UserId
+                }));
         }
 
         private string GetAllUserEmailAddresses()

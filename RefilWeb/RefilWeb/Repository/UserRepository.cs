@@ -22,7 +22,7 @@ namespace RefilWeb.Repository
         
         public User Get(int id)
         {
-            return context.Users.Single(u => u.UserId == id);
+            return context.Users.SingleOrDefault(u => u.UserId == id);
         }
 
         public IEnumerable<User> GetAll()
@@ -39,6 +39,12 @@ namespace RefilWeb.Repository
         {
             context.Users.Attach(user);
             context.Entry(user).State = EntityState.Modified;
+            context.SaveChanges();
+        }
+
+        public void Delete(User user)
+        {
+            context.Users.Remove(user);
             context.SaveChanges();
         }
     }

@@ -1,18 +1,17 @@
 ﻿@model RefilWeb.Models.Announcement
 
 @{
-    ViewBag.Title = "AnnouncementEdit";
+    ViewBag.Title = "Edit Announcement";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>AnnouncementEdit</h2>
+<h2>Edit Announcement</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Announcement</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -28,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Message, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Message, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
             </div>
         </div>

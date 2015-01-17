@@ -36,9 +36,36 @@ namespace RefilWeb.Service
             return response;
         }
 
-        public User Get(int id)
+        public IServiceValidationResponse<User> Get(int id)
         {
-            return repository.Get(id);
+            var response = new ServiceValidationResponse<User>();
+
+            var user = repository.Get(id);
+            if (user != null)
+            {
+                response.ServiceResultEntity = user;
+            }
+            else
+            {
+                response.AddError("Id", "User does not exist");
+            }
+
+            return response;
+        }
+
+        public IServiceValidationResponse Delete(User user)
+        {
+            var response = new ServiceValidationResponse();
+            if (repository.GetAll().Any(u => u.UserId == user.UserId))
+            {
+                repository.Delete(user);
+            }
+            else
+            {
+                response.AddError("Id", "That user does not exist");
+            }
+
+            return response;
         }
 
         public void Update(User user)
@@ -83,7 +110,7 @@ namespace RefilWeb.Service
 
             if (repository.GetAll().Any(u => u.UserId == id))
             {
-                var user = Get(id);
+                var user = Get(id).ServiceResultEntity;
 
                 if (user.Roles.All(r => r.Name != "Admin"))
                 {

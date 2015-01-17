@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
-using RefilWeb.Authentication;
+﻿using System.Data.Entity;
 
 namespace RefilWeb.Models
 {
@@ -25,18 +20,9 @@ namespace RefilWeb.Models
                     m.MapLeftKey("UserId");
                     m.MapRightKey("RoleId");
                 });
-            modelBuilder.Entity<Meeting>().HasOptional(m => m.Book).WithOptionalPrincipal().Map(m =>
-                {
-                    m.MapKey("MeetingId");
-                });
-            modelBuilder.Entity<User>().HasMany(u => u.UpvotedBooks).WithOptional().Map(m =>
-                {
-                    m.MapKey("UpvotedBook_Id");
-                });
-            modelBuilder.Entity<User>().HasMany(u => u.DownvotedBooks).WithOptional().Map(m =>
-                {
-                    m.MapKey("DownvotedBook_Id");
-                });
+            modelBuilder.Entity<Meeting>().HasOptional(m => m.Book).WithOptionalPrincipal().Map(m => m.MapKey("MeetingId")).WillCascadeOnDelete();
+            modelBuilder.Entity<User>().HasMany(u => u.UpvotedBooks).WithOptional().Map(m => m.MapKey("UpvotedBook_Id"));
+            modelBuilder.Entity<User>().HasMany(u => u.DownvotedBooks).WithOptional().Map(m => m.MapKey("DownvotedBook_Id"));
         }
     }
 }

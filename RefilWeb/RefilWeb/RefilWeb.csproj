@@ -161,7 +161,7 @@
     <Compile Include="Controllers\AnnouncementController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BookController.cs" />
-    <Compile Include="Controllers\CreateAccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\MeetingsController.cs" />
@@ -187,6 +187,7 @@
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\SendEmailViewModel.cs" />
     <Compile Include="Models\ViewModels\SuggestBookViewModel.cs" />
+    <Compile Include="Models\ViewModels\ViewUsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AnnouncementRepository.cs" />
     <Compile Include="Repository\BookRepository.cs" />
@@ -215,7 +216,7 @@
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Authentication\LoginView.cshtml" />
-    <Content Include="Views\CreateAccount\CreateAccount.cshtml" />
+    <Content Include="Views\User\UserCreate.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Meetings\CreateMeeting.cshtml" />
     <Content Include="Views\Meetings\MeetingList.cshtml" />
@@ -231,6 +232,9 @@
     <Content Include="Views\Admin\AdminEmail.cshtml" />
     <Content Include="Views\Home\BookChooseMeeting.cshtml" />
     <Content Include="Views\Admin\AdminPromote.cshtml" />
+    <Content Include="Views\Admin\AdminViewUsers.cshtml" />
+    <Content Include="Views\User\UserDelete.cshtml" />
+    <Content Include="Views\Meetings\MeetingDelete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

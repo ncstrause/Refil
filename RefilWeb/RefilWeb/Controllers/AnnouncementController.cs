@@ -37,13 +37,14 @@ namespace RefilWeb.Controllers
         [Route("{id}/edit"), HttpGet]
         public ActionResult GetEdit(int id)
         {
-            AnnouncementService.Get(id);
+            var announcement = AnnouncementService.Get(id);
 
-            return View("AnnouncementEdit");
+            return View("AnnouncementEdit", announcement);
         }
         [Route("{id}/edit"), HttpPost]
         public ActionResult PostEdit(Announcement announcement)
         {
+            announcement.Creator = UserService.Get(User.UserId).ServiceResultEntity;
             AnnouncementService.Update(announcement);
 
             return Redirect("/announcements/list");
@@ -52,6 +53,9 @@ namespace RefilWeb.Controllers
         [Route("{id}/delete"), HttpGet]
         public ActionResult Delete(int id)
         {
+            var announcement = AnnouncementService.Get(id);
+            AnnouncementService.Delete(announcement);
+
             return Redirect("/announcements/list");
         }
     }

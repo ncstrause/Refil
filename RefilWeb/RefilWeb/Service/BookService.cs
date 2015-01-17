@@ -34,7 +34,7 @@ namespace RefilWeb.Service
 
         public IEnumerable<Book> GetAll()
         {
-            return repository.GetAll();
+            return repository.GetAll().ToList();
         }
 
         public Book Get(int id)
@@ -45,7 +45,7 @@ namespace RefilWeb.Service
         public IEnumerable<Book> GetForMeeting(int meetingId)
         {
             var meeting = meetingService.Get(meetingId);
-            return repository.GetAll().Where(m => m.Meeting == meeting);
+            return repository.GetAll().Where(m => m.Meeting == meeting).ToList();
         }
 
         public void Delete(Book book)

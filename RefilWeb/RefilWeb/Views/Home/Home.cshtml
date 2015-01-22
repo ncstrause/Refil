@@ -23,8 +23,8 @@
                     <tr>
                         <td>@Html.DisplayFor(m => m.NextMeeting.Date)</td>
                         <td>@(Model.NextMeeting.Book != null ? Model.NextMeeting.Book.Title : "No book decided yet.")</td>
-                        <td>@(Model.NextMeeting.DrinkProvider != null ? Model.NextMeeting.DrinkProvider.FullName : "No drink provider yet.")</td>
                         <td>@(Model.NextMeeting.FoodProvider != null ? Model.NextMeeting.FoodProvider.FullName : "No food provider yet.")</td>
+                        <td>@(Model.NextMeeting.DrinkProvider != null ? Model.NextMeeting.DrinkProvider.FullName : "No drink provider yet.")</td>
                     </tr>
                 </table>
             }

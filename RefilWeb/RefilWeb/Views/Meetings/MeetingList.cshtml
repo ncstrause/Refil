@@ -23,10 +23,10 @@
             @Html.DisplayNameFor(model => model.Book)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DrinkProvider)
+            @Html.DisplayNameFor(model => model.FoodProvider)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FoodProvider)
+            @Html.DisplayNameFor(model => model.DrinkProvider)
         </th>
     </tr>
 
@@ -37,6 +37,24 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Book.Title)
+        </td>
+        <td>
+            @if (item.FoodProvider != null)
+            {
+                <p>
+                    <span>@item.FoodProvider.FirstName</span>
+                    <span>@item.FoodProvider.LastName</span>
+                </p>
+
+                if (item.FoodProvider.UserId == User.UserId)
+                {
+                    <a href="/meetings/@item.Id/food/unregister">unregister</a>
+                }
+            }
+            else
+            {
+                <a href="/meetings/@item.Id/food/register">sign up for food</a>
+            }
         </td>
         <td>
             @if (item.DrinkProvider != null)
@@ -58,29 +76,10 @@
             
         </td>
         <td>
-            @if (item.FoodProvider != null)
-            {
-                <p>
-                    <span>@item.FoodProvider.FirstName</span>
-                    <span>@item.FoodProvider.LastName</span>
-                </p>
-
-                if (item.FoodProvider.UserId == User.UserId)
-                {
-                    <a href="/meetings/@item.Id/food/unregister">unregister</a>
-                }
-            }
-            else
-            {
-                <a href="/meetings/@item.Id/food/register">sign up for food</a>
-            }
-        </td>
-        <td>
             <a href="/meetings/@item.Id/books/list">books</a>
             @if (User.IsAdmin)
             {
-                <br />
-                //@Html.ActionLink("edit", "GetEdit", "Meetings", new { id = @item.Id }, new { })
+                <br />                
                 <a href="/meetings/@item.Id/edit">edit</a>
                 <br />
                 @Html.ActionLink("delete", "GetDelete", "Meetings", new { id = @item.Id }, new {})

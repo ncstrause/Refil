@@ -45,7 +45,7 @@ namespace RefilWeb.Service
 
             if (meetings.Any(m => m.Date > DateTime.Now))
             {
-                response.ServiceResultEntity = meetings.Where(m => m.Date > DateTime.Now).OrderBy(m => m.Date).First();
+                response.ServiceResultEntity = meetings.Where(m => m.Date.AddDays(1) > DateTime.Now).OrderBy(m => m.Date).First();
             }
             else
             {

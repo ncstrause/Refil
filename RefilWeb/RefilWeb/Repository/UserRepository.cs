@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using RefilWeb.Models;
 using System.Data.Entity;
@@ -32,7 +33,8 @@ namespace RefilWeb.Repository
 
         public User Get(string email)
         {
-            return context.Users.Single(u => u.Email == email);
+            return context.Users.ToList().Single(u => 
+                String.Equals(u.Email, email, StringComparison.OrdinalIgnoreCase));
         }
 
         public void Update(User user)

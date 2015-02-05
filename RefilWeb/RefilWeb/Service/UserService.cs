@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using RefilWeb.Authentication;
@@ -78,7 +79,7 @@ namespace RefilWeb.Service
             var response = new ServiceValidationResponse<User>();
             var hashedPassword = Md5Hash(password);
 
-            if (repository.GetAll().Any(u => u.Email == email))
+            if (repository.GetAll().Any(u => String.Equals(email, u.Email, StringComparison.OrdinalIgnoreCase)))
             {
                 var user = repository.Get(email);
 
